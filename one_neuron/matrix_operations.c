@@ -58,3 +58,16 @@ matrix create_random_normal_matrix(int height, int width)
 
     return mat;
 }
+
+int delete_matrix(matrix mat)
+{
+    int i;
+
+    for (i = 0; i < mat.shape[0]; i++)
+    {
+        free(mat.mat[i]);
+    }
+    free(mat.mat);
+    free(mat.shape);
+    return (0);
+} 

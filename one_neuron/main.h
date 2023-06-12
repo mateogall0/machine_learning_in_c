@@ -15,8 +15,16 @@ typedef struct matrix
     int *shape;
 } matrix;
 
+typedef struct neuron
+{
+    matrix W;
+    float b;
+    float A;
+}neuron;
+
 float random_normal();
 void print_matrix(matrix mat);
 matrix create_random_normal_matrix();
+int delete_matrix(matrix mat);
 
 #endif

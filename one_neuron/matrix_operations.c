@@ -21,14 +21,40 @@ float random_normal()
 void print_matrix(matrix mat)
 {
     int i, j;
-    for (i = 0; mat.shape[i]; i++)
+    for (i = 0; i < mat.shape[0]; i++)
     {
         putchar('[');
-        for (j = 0; j < mat.shape[i]; j++)
+        for (j = 0; j < mat.shape[1]; j++)
         {
-            putchar(mat.mat[i][j]);
+            printf("%f", mat.mat[i][j]);
+            fflush(stdout);
+            if (j + 1 < mat.shape[1])
+                write(STDOUT_FILENO, ", ", 2);
         }
         putchar(']');
         putchar(10);
     }
+}
+
+
+matrix create_random_normal_matrix(int height, int width)
+{
+    matrix mat;
+
+    
+    mat.shape = malloc(sizeof(int) * 2);
+    mat.shape[0] = height;
+    mat.shape[1] = width;
+
+    mat.mat = malloc(sizeof(int *) * height);
+    for (int i = 0; i < height; i++)
+    {
+        mat.mat[i] = malloc(sizeof(int) * width);
+        for (int j = 0; j < width; j++)
+        {
+            mat.mat[i][j] = random_normal();
+        }
+    }
+
+    return mat;
 }

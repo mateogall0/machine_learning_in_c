@@ -16,3 +16,19 @@ float random_normal()
 
     return sqrt(-2.0 * log(u1)) * cos(2.0 * M_PI * u2);  // Box-Muller transform
 }
+
+
+void print_matrix(matrix mat)
+{
+    int i, j;
+    for (i = 0; mat.shape[i]; i++)
+    {
+        putchar('[');
+        for (j = 0; j < mat.shape[i]; j++)
+        {
+            putchar(mat.mat[i][j]);
+        }
+        putchar(']');
+        putchar(10);
+    }
+}

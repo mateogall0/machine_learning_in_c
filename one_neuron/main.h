@@ -13,8 +13,9 @@ float random_normal();
 typedef struct matrix
 {
     int **mat;
-    int len;
+    int *shape;
 } matrix;
 
+void print_matrix(matrix mat);
 
 #endif

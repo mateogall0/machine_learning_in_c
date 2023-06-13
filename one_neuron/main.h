@@ -11,7 +11,7 @@
 
 typedef struct matrix
 {
-    float **mat;
+    double **mat;
     int *shape;
 } matrix;
 
@@ -22,7 +22,7 @@ typedef struct neuron
     float A;
 }neuron;
 
-float random_normal();
+double random_normal();
 void print_matrix(matrix mat);
 matrix create_random_normal_matrix();
 int delete_matrix(matrix mat);

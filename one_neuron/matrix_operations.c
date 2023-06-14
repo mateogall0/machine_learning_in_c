@@ -26,13 +26,13 @@ void print_matrix(matrix mat)
         putchar('[');
         for (j = 0; j < mat.shape[1]; j++)
         {
-            printf("%lf", mat.mat[i][j]);
+            printf("%.8lf", mat.mat[i][j]);
             fflush(stdout);
             if (j + 1 < mat.shape[1])
                 write(STDOUT_FILENO, ", ", 2);
         }
         putchar(']');
-        putchar(10);
+        putchar('\n');
     }
 }
 
@@ -97,4 +97,40 @@ matrix T(matrix mat)
     }
 
     return transposed;
+}
+
+matrix dot(matrix mat1, matrix mat2)
+{
+    matrix result;
+
+    // Check if the matrices can be multiplied
+    if (mat1.shape[1] != mat2.shape[0]) {
+        printf("Error: Incompatible matrix dimensions for multiplication\n");
+        result.mat = NULL;
+        result.shape = NULL;
+        return result;
+    }
+
+    // Allocate memory for the result matrix
+    result.shape = malloc(sizeof(int) * 2);
+    result.shape[0] = mat1.shape[0];
+    result.shape[1] = mat2.shape[1];
+
+    result.mat = malloc(sizeof(double *) * result.shape[0]);
+    for (int i = 0; i < result.shape[0]; i++) {
+        result.mat[i] = malloc(sizeof(double) * result.shape[1]);
+    }
+
+    // Perform matrix multiplication
+    for (int i = 0; i < mat1.shape[0]; i++) {
+        for (int j = 0; j < mat2.shape[1]; j++) {
+            double sum = 0.0;
+            for (int k = 0; k < mat1.shape[1]; k++) {
+                sum += mat1.mat[i][k] * mat2.mat[k][j];
+            }
+            result.mat[i][j] = sum;
+        }
+    }
+
+    return result;
 }

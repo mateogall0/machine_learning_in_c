@@ -28,5 +28,6 @@ matrix create_random_normal_matrix();
 void delete_matrix(matrix mat);
 double sigmoid(double x);
 matrix T(matrix mat);
+matrix dot(matrix mat1, matrix mat2);
 
 #endif

@@ -77,3 +77,31 @@ double sigmoid(double x)
 {
     return 1 / (1 + exp(x * -1));
 }
+
+
+matrix T(matrix mat)
+{
+    matrix transposed;
+    int i, j;
+
+    transposed.shape = malloc(sizeof(int) * 2);
+    transposed.shape[0] = mat.shape[1];
+    transposed.shape[1] = mat.shape[0];
+
+    transposed.mat = malloc(sizeof(double *) * transposed.shape[0]);
+    for (i = 0; i < transposed.shape[0]; i++)
+    {
+        transposed.mat[i] = malloc(sizeof(double) * transposed.shape[1]);
+        for (j = 0; j < transposed.shape[1]; j++)
+        {}
+    }
+    for (i = 0; i < transposed.shape[1]; i++)
+    {
+        for (j = 0; j < transposed.shape[0]; j++)
+        {
+            transposed.mat[j][i] = mat.mat[i][j];
+        }
+    }
+
+    return transposed;
+}

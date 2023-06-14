@@ -27,5 +27,6 @@ void print_matrix(matrix mat);
 matrix create_random_normal_matrix();
 void delete_matrix(matrix mat);
 double sigmoid(double x);
+matrix T(matrix mat);
 
 #endif

@@ -134,3 +134,16 @@ matrix dot(matrix mat1, matrix mat2)
 
     return result;
 }
+
+double sum(matrix mat)
+{
+    double sum = 0.0;
+
+    for (int i = 0; i < mat.shape[0]; i++) {
+        for (int j = 0; j < mat.shape[1]; j++) {
+            sum += mat.mat[i][j];
+        }
+    }
+
+    return sum;
+}

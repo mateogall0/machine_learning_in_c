@@ -15,6 +15,8 @@ int main()
     puts("================");
     print_matrix(dot(mat, mat2));
 
+    double su = sum(mat);
+    printf("%.16lf\n", su);
     delete_matrix(mat);
     delete_matrix(mat2);
     delete_matrix(tr);

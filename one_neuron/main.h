@@ -29,5 +29,6 @@ void delete_matrix(matrix mat);
 double sigmoid(double x);
 matrix T(matrix mat);
 matrix dot(matrix mat1, matrix mat2);
+double sum(matrix a);
 
 #endif

@@ -12,9 +12,10 @@ int main()
     print_matrix(tr);
 
     delete_matrix(mat);
+    delete_matrix(tr);
 
-    double s = sigmoid(1);
+    double s = sigmoid(0.5);
 
-    printf("%lf\n", s);
+    printf("%.16lf\n", s);
     return 0;
 }

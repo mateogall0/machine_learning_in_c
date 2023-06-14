@@ -41,33 +41,39 @@ matrix create_random_normal_matrix(int height, int width)
 {
     matrix mat;
 
+    if (height <= 0 || width <= 0)
+    {
+        fprintf(stderr, "Error: height and width must be > 0\n");
+        exit(1);
+    }
     
     mat.shape = malloc(sizeof(int) * 2);
     mat.shape[0] = height;
     mat.shape[1] = width;
 
-    mat.mat = malloc(sizeof(int *) * height);
+    mat.mat = malloc(sizeof(double *) * height);
     for (int i = 0; i < height; i++)
     {
         mat.mat[i] = malloc(sizeof(double) * width);
         for (int j = 0; j < width; j++)
-        {
             mat.mat[i][j] = random_normal();
-        }
     }
 
     return mat;
 }
 
-int delete_matrix(matrix mat)
+void delete_matrix(matrix mat)
 {
     int i;
 
     for (i = 0; i < mat.shape[0]; i++)
-    {
         free(mat.mat[i]);
-    }
     free(mat.mat);
     free(mat.shape);
-    return (0);
-} 
+}
+
+
+double sigmoid(double x)
+{
+    return 1 / (1 + exp(x * -1));
+}

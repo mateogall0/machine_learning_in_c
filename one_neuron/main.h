@@ -25,6 +25,7 @@ typedef struct neuron
 double random_normal();
 void print_matrix(matrix mat);
 matrix create_random_normal_matrix();
-int delete_matrix(matrix mat);
+void delete_matrix(matrix mat);
+double sigmoid(double x);
 
 #endif

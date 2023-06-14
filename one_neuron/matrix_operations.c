@@ -89,17 +89,11 @@ matrix T(matrix mat)
 
     transposed.mat = malloc(sizeof(double *) * transposed.shape[0]);
     for (i = 0; i < transposed.shape[0]; i++)
-    {
         transposed.mat[i] = malloc(sizeof(double) * transposed.shape[1]);
-        for (j = 0; j < transposed.shape[1]; j++)
-        {}
-    }
     for (i = 0; i < transposed.shape[1]; i++)
     {
         for (j = 0; j < transposed.shape[0]; j++)
-        {
             transposed.mat[j][i] = mat.mat[i][j];
-        }
     }
 
     return transposed;

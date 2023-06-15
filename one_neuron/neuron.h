@@ -16,8 +16,8 @@ typedef struct matrix
 typedef struct neuron
 {
     matrix W;
-    float b;
-    float A;
+    double b;
+    double A;
 }neuron;
 
 double random_normal();
@@ -29,5 +29,9 @@ matrix T(matrix mat);
 matrix dot(matrix mat1, matrix mat2);
 double sum(matrix a);
 matrix whereMoreThanPointFive(matrix mat);
+
+neuron create_neuron(int nx);
+void print_neuron(neuron n);
+void delete_neuron(neuron n);
 
 #endif

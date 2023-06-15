@@ -2,18 +2,18 @@
 
 double random_normal()
 {
-	static int initialized = 0;
-    double u1, u2;
+    double loc = 0.0, scale = 1.0;
+	double u1, u2, v1, v2, s;
+    do {
+        u1 = ((double)rand() / RAND_MAX) * 2 - 1;
+        u2 = ((double)rand() / RAND_MAX) * 2 - 1;
+        s = u1 * u1 + u2 * u2;
+    } while (s >= 1 || s == 0);
 
-    if (!initialized) {
-        srand(time(NULL));  // Initialize the random number generator
-        initialized = 1;
-    }
+    v1 = sqrt(-2 * log(s) / s) * u1;
+    v2 = sqrt(-2 * log(s) / s) * u2;
 
-    u1 = (double)rand() / RAND_MAX;  // Generate a random number between 0 and 1
-    u2 = (double)rand() / RAND_MAX;  // Generate a second random number between 0 and 1
-
-    return sqrt(-2.0 * log(u1)) * cos(2.0 * M_PI * u2);  // Box-Muller transform
+    return loc + scale * v1;
 }
 
 void print_matrix(matrix mat)
@@ -160,5 +160,24 @@ matrix whereMoreThanPointFive(matrix mat)
         }
     }
 
+    return result;
+}
+
+matrix matLog(matrix mat)
+{
+    int i, j;
+    matrix result;
+
+    result.shape = malloc(sizeof(mat.shape));
+    result.shape[0] = mat.shape[0];
+    result.shape[1] = mat.shape[1];
+
+    result.mat = malloc(sizeof(double *) * result.shape[0]);
+    for (i = 0; i < result.shape[0]; i++)
+    {
+        result.mat[i] = malloc(sizeof(double) * result.shape[1]);
+        for (j = 0; j < result.shape[1]; j++)
+            result.mat[i][j] = log(mat.mat[i][j]);
+    }
     return result;
 }

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "neuron.h"
 
 
 double random_normal()

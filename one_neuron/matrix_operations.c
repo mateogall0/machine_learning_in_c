@@ -21,6 +21,7 @@ double random_normal()
 void print_matrix(matrix mat)
 {
     int i, j;
+
     for (i = 0; i < mat.shape[0]; i++)
     {
         putchar('[');
@@ -46,7 +47,7 @@ matrix create_random_normal_matrix(int height, int width)
         fprintf(stderr, "Error: height and width must be > 0\n");
         exit(1);
     }
-    
+
     mat.shape = malloc(sizeof(int) * 2);
     mat.shape[0] = height;
     mat.shape[1] = width;
@@ -70,12 +71,6 @@ void delete_matrix(matrix mat)
         free(mat.mat[i]);
     free(mat.mat);
     free(mat.shape);
-}
-
-
-double sigmoid(double x)
-{
-    return 1 / (1 + exp(x * -1));
 }
 
 matrix T(matrix mat)
@@ -108,7 +103,7 @@ matrix dot(matrix mat1, matrix mat2)
         fprintf(stderr, "Error: incompatible matrix dimensions for multiplication\n");
         result.mat = NULL;
         result.shape = NULL;
-        return result;
+        exit(1);
     }
 
     // Allocate memory for the result matrix

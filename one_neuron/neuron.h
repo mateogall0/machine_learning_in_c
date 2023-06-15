@@ -17,7 +17,7 @@ typedef struct neuron
 {
     matrix W;
     double b;
-    double A;
+    matrix A;
 }neuron;
 
 double random_normal();

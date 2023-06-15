@@ -1,6 +1,5 @@
 #include "neuron.h"
 
-
 double random_normal()
 {
 	static int initialized = 0;
@@ -16,7 +15,6 @@ double random_normal()
 
     return sqrt(-2.0 * log(u1)) * cos(2.0 * M_PI * u2);  // Box-Muller transform
 }
-
 
 void print_matrix(matrix mat)
 {
@@ -36,7 +34,6 @@ void print_matrix(matrix mat)
         putchar('\n');
     }
 }
-
 
 matrix create_random_normal_matrix(int height, int width)
 {
@@ -142,7 +139,6 @@ double sum(matrix mat)
 
     return sum;
 }
-
 
 matrix whereMoreThanPointFive(matrix mat)
 {

@@ -33,5 +33,6 @@ matrix whereMoreThanPointFive(matrix mat);
 neuron create_neuron(int nx);
 void print_neuron(neuron n);
 void delete_neuron(neuron n);
+matrix forward_prop(neuron n, matrix X);
 
 #endif

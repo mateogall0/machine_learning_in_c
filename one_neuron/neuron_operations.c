@@ -1,6 +1,5 @@
 #include "neuron.h"
 
-
 neuron create_neuron(int nx)
 {
     neuron n;
@@ -28,7 +27,7 @@ void print_neuron(neuron n)
     write(STDOUT_FILENO, "Anchors: ", 9);
     fflush(stdout);
     if (n.A.shape[0] != 0)print_matrix(n.A);
-    else puts("0.0");
+    else puts("0");
 }
 
 void delete_neuron(neuron n)
@@ -40,4 +39,11 @@ void delete_neuron(neuron n)
 double sigmoid(double x)
 {
     return 1 / (1 + exp(x * -1));
+}
+
+matrix forward_prop(neuron n, matrix X)
+{
+    delete_matrix(n.A);
+    n.A = X;
+    return X;
 }

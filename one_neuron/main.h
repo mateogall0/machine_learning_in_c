@@ -7,8 +7,6 @@
 #include <math.h>
 #include <unistd.h>
 
-#define EULER 2.71828182845904523536
-
 typedef struct matrix
 {
     double **mat;
@@ -30,5 +28,6 @@ double sigmoid(double x);
 matrix T(matrix mat);
 matrix dot(matrix mat1, matrix mat2);
 double sum(matrix a);
+matrix whereMoreThanPointFive(matrix mat);
 
 #endif

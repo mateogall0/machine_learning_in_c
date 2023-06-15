@@ -105,7 +105,7 @@ matrix dot(matrix mat1, matrix mat2)
 
     // Check if the matrices can be multiplied
     if (mat1.shape[1] != mat2.shape[0]) {
-        printf("Error: Incompatible matrix dimensions for multiplication\n");
+        fprintf(stderr, "Error: incompatible matrix dimensions for multiplication\n");
         result.mat = NULL;
         result.shape = NULL;
         return result;
@@ -146,4 +146,28 @@ double sum(matrix mat)
     }
 
     return sum;
+}
+
+
+matrix whereMoreThanPointFive(matrix mat)
+{
+    matrix result;
+
+    result.shape = malloc(sizeof(mat.shape));
+    result.shape[0] = mat.shape[0];
+    result.shape[1] = mat.shape[1];
+
+    result.mat = malloc(sizeof(double *) * result.shape[0]);
+    for (int i = 0; i < result.shape[0]; i++) {
+        result.mat[i] = malloc(sizeof(double) * result.shape[1]);
+        for (int j = 0; j < result.shape[1]; j++)
+        {
+            if (mat.mat[i][j] >= 0.5)
+                result.mat[i][j] = 1;
+            else
+                result.mat[i][j] = 0;
+        }
+    }
+
+    return result;
 }

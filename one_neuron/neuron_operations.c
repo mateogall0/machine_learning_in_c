@@ -30,3 +30,8 @@ void delete_neuron(neuron n)
 {
     delete_matrix(n.W);
 }
+
+double sigmoid(double x)
+{
+    return 1 / (1 + exp(x * -1));
+}

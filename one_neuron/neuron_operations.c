@@ -42,9 +42,8 @@ matrix sigmoid(matrix x)
     return matDivLeft(1, matAdd(matExp(matMul(x, -1)), 1));
 }
 
-matrix forward_prop(neuron n, matrix X)
+matrix forward_prop(neuron *n, matrix X)
 {
-    delete_matrix(n.A);
-    n.A = X;
-    return X;
+    matrix x = matAdd(dot(n->W, X), n->b);
+    return n->A = sigmoid(x);
 }

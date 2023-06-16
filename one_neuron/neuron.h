@@ -39,6 +39,6 @@ neuron create_neuron(int nx);
 void print_neuron(neuron n);
 void delete_neuron(neuron n);
 matrix sigmoid(matrix x);
-matrix forward_prop(neuron n, matrix X);
+matrix forward_prop(neuron *n, matrix X);
 
 #endif

@@ -30,9 +30,11 @@ matrix dot(matrix mat1, matrix mat2);
 double sum(matrix a);
 matrix whereMoreThanPointFive(matrix mat);
 matrix matLog(matrix mat);
+matrix matAdd(matrix mat, double n);
 
 neuron create_neuron(int nx);
 void print_neuron(neuron n);
 void delete_neuron(neuron n);
 matrix forward_prop(neuron n, matrix X);
+
 #endif

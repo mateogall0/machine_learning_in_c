@@ -181,3 +181,22 @@ matrix matLog(matrix mat)
     }
     return result;
 }
+
+matrix matAdd(matrix mat, double n)
+{
+    int i, j;
+    matrix result;
+
+    result.shape = malloc(sizeof(mat.shape));
+    result.shape[0] = mat.shape[0];
+    result.shape[1] = mat.shape[1];
+
+    result.mat = malloc(sizeof(double *) * result.shape[0]);
+    for (i = 0; i < result.shape[0]; i++)
+    {
+        result.mat[i] = malloc(sizeof(double) * result.shape[1]);
+        for (j = 0; j < result.shape[1]; j++)
+            result.mat[i][j] = mat.mat[i][j] + n;
+    }
+    return result;
+}

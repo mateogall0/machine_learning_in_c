@@ -24,7 +24,6 @@ double random_normal();
 void print_matrix(matrix mat);
 matrix create_random_normal_matrix();
 void delete_matrix(matrix mat);
-double sigmoid(double x);
 matrix T(matrix mat);
 matrix dot(matrix mat1, matrix mat2);
 double sum(matrix a);
@@ -39,6 +38,7 @@ matrix matExp(matrix mat);
 neuron create_neuron(int nx);
 void print_neuron(neuron n);
 void delete_neuron(neuron n);
+matrix sigmoid(matrix x);
 matrix forward_prop(neuron n, matrix X);
 
 #endif

@@ -36,9 +36,10 @@ void delete_neuron(neuron n)
     delete_matrix(n.A);
 }
 
-double sigmoid(double x)
+matrix sigmoid(matrix x)
 {
-    return 1 / (1 + exp(x * -1));
+    // sigmoid(x) = 1 / (1 + e^-x)
+    return matDivLeft(1, matAdd(matExp(matMul(x, -1)), 1));
 }
 
 matrix forward_prop(neuron n, matrix X)

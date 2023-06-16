@@ -6,7 +6,7 @@ int main()
     matrix X = create_random_normal_matrix(1, 9);
     print_matrix(X);
     puts("===============================================");
-    matrix l = matExp(X);
+    matrix l = sigmoid(X);
     print_matrix(l);
     n.A = forward_prop(n, X);
     delete_matrix(l);

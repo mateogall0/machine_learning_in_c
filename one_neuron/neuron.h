@@ -31,6 +31,10 @@ double sum(matrix a);
 matrix whereMoreThanPointFive(matrix mat);
 matrix matLog(matrix mat);
 matrix matAdd(matrix mat, double n);
+matrix matSubRight(matrix mat, double n);
+matrix matMul(matrix mat, double n);
+matrix matDivLeft(double n, matrix mat);
+matrix matExp(matrix mat);
 
 neuron create_neuron(int nx);
 void print_neuron(neuron n);

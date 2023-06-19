@@ -39,6 +39,7 @@ matrix matExp(matrix mat);
 matrix matAddOfMatrices(matrix mat1, matrix mat2);
 matrix matMulElementWise(matrix mat1, matrix mat2);
 matrix matSubElementWise(matrix mat1, matrix mat2);
+matrix duplicateMatrix(matrix original);
 
 neuron create_neuron(int nx);
 void print_neuron(neuron n);

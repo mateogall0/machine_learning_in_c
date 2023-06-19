@@ -81,6 +81,8 @@ void gradient_descent(neuron *n, matrix X, matrix Y, matrix A, double alpha)
     matrix dZ = matSubElementWise(A, Y);
     matrix dW = matMul(dot(X, T(dZ)), 1/m);
     double db = (1/m) * sum(dZ);
-    n->W = matSubElementWise(n->W, matMul(T(dW), alpha));
+    matrix a = matSubElementWise(n->W, matMul(T(dW), alpha));
+    delete_matrix(n->W);
+    n->W = a;
     n->b -= (alpha * db);
 }

@@ -62,14 +62,23 @@ matrix create_random_normal_matrix(int height, int width)
 
 void delete_matrix(matrix mat)
 {
-    /*
     int i;
 
-    for (i = 0; i < mat.shape[0]; i++)
-        free(mat.mat[i]);
-    free(mat.mat);
-    free(mat.shape);
-    */
+    if (mat.mat) {
+        for (i = 0; i < mat.shape[0]; i++) {
+            if (mat.mat[i]) {
+                free(mat.mat[i]);
+                mat.mat[i] = NULL;
+            }
+        }
+        free(mat.mat);
+        mat.mat = NULL;
+    }
+
+    if (mat.shape) {
+        free(mat.shape);
+        mat.shape = NULL;
+    }
 }
 
 matrix T(matrix mat)
@@ -384,6 +393,8 @@ matrix matSubElementWise(matrix mat1, matrix mat2)
     result.shape = (int *)malloc(2 * sizeof(int));
     result.shape[0] = rows;
     result.shape[1] = cols;
+    print_matrix(mat1);
+    print_matrix(mat2);
 
     result.mat = (double **)malloc(rows * sizeof(double *));
     for (int i = 0; i < rows; i++)
@@ -396,4 +407,28 @@ matrix matSubElementWise(matrix mat1, matrix mat2)
     }
 
     return result;
+}
+
+matrix duplicateMatrix(matrix original)
+{
+    // Create a new matrix with the same shape
+    matrix duplicate;
+    duplicate.shape = (int*)malloc(2 * sizeof(int));
+    duplicate.shape[0] = original.shape[0];
+    duplicate.shape[1] = original.shape[1];
+
+    // Allocate memory for the matrix data
+    duplicate.mat = (double**)malloc(original.shape[0] * sizeof(double*));
+    for (int i = 0; i < original.shape[0]; i++) {
+        duplicate.mat[i] = (double*)malloc(original.shape[1] * sizeof(double));
+    }
+
+    // Copy the values from the original matrix to the duplicate
+    for (int i = 0; i < original.shape[0]; i++) {
+        for (int j = 0; j < original.shape[1]; j++) {
+            duplicate.mat[i][j] = original.mat[i][j];
+        }
+    }
+
+    return duplicate;
 }

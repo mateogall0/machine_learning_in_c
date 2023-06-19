@@ -37,6 +37,7 @@ matrix matDiv(matrix mat, double n);
 matrix matDivLeft(double n, matrix mat);
 matrix matExp(matrix mat);
 matrix matAddOfMatrices(matrix mat1, matrix mat2);
+matrix matMulElementWise(matrix mat1, matrix mat2);
 
 neuron create_neuron(int nx);
 void print_neuron(neuron n);

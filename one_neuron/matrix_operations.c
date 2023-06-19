@@ -62,12 +62,14 @@ matrix create_random_normal_matrix(int height, int width)
 
 void delete_matrix(matrix mat)
 {
+    /*
     int i;
 
     for (i = 0; i < mat.shape[0]; i++)
         free(mat.mat[i]);
     free(mat.mat);
     free(mat.shape);
+    */
 }
 
 matrix T(matrix mat)
@@ -340,6 +342,33 @@ matrix matAddOfMatrices(matrix mat1, matrix mat2)
         result.mat[i] = (double *)malloc(columns * sizeof(double));
         for (int j = 0; j < columns; j++) {
             result.mat[i][j] = mat1.mat[i][j] + mat2.mat[i][j];
+        }
+    }
+
+    return result;
+}
+
+matrix matMulElementWise(matrix mat1, matrix mat2)
+{
+    int rows = mat1.shape[0];
+    int cols = mat1.shape[1];
+
+    // Create a new matrix to store the result
+    matrix result;
+    result.shape = malloc(2 * sizeof(int));
+    result.shape[0] = rows;
+    result.shape[1] = cols;
+
+    // Allocate memory for the result matrix
+    result.mat = malloc(rows * sizeof(double*));
+    for (int i = 0; i < rows; i++) {
+        result.mat[i] = malloc(cols * sizeof(double));
+    }
+
+    // Perform element-wise multiplication
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            result.mat[i][j] = mat1.mat[i][j] * mat2.mat[i][j];
         }
     }
 

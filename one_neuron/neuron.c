@@ -24,7 +24,7 @@ int main()
     X.mat[0][1] = 0.4;
     X.mat[1][1] = 0.5;
     X.mat[2][1] = 0.6;
-
+    print_matrix(X);
     // Perform forward propagation
     matrix A = forward_prop(&n, X);
 
@@ -42,14 +42,21 @@ int main()
     // Assign values to the target matrix
     Y.mat[0][0] = 1;
     Y.mat[0][1] = 0;
-
+    puts("-------");
+    print_matrix(Y);
     // Calculate the cost
-    double cost_val = cost(&n, Y, A);
+    double cost_val = cost(Y, A);
 
     // Print the neuron and the cost
     printf("Neuron:\n");
     print_neuron(n);
     printf("Cost: %.8lf\n", cost_val);
+
+    matrix prediction = evaluatePrediction(&n, X);
+    puts("prediction:");
+    print_matrix(prediction);
+
+    printf("EvaluateCost: %lf\n", evaluateCost(&n, X, Y));
 
     // Cleanup
     delete_neuron(n);

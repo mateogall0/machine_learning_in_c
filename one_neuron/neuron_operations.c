@@ -49,16 +49,27 @@ matrix forward_prop(neuron *n, matrix X)
     return n->A = sigmoid(x);
 }
 
-double cost(neuron *n, matrix Y, matrix A)
+double cost(matrix Y, matrix A)
 {
     /*
     To avoid division by zero errors:
     1.0000001 - A instead of 1 - A
     */
-    int m = Y.shape[1];
     matrix y = matMulElementWise(Y, matLog(A));
     matrix x = matLog(matSubLeft(1.0000001, A));
     x = matMulElementWise(matSubLeft(1, Y), x);
     double c = sum(matAddOfMatrices(y, x));
-    return (c * -1) / m;
+    return (c * -1) / Y.shape[1];
+}
+
+matrix evaluatePrediction(neuron *n, matrix X)
+{
+    matrix A = forward_prop(n, X);
+    return whereMoreThanPointFive(A);
+}
+
+double evaluateCost(neuron *n, matrix X, matrix Y)
+{
+    matrix A = forward_prop(n, X);
+    return cost(Y, A);
 }

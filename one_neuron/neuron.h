@@ -44,6 +44,8 @@ void print_neuron(neuron n);
 void delete_neuron(neuron n);
 matrix sigmoid(matrix x);
 matrix forward_prop(neuron *n, matrix X);
-double cost(neuron *n, matrix Y, matrix A);
+double cost(matrix Y, matrix A);
+matrix evaluatePrediction(neuron *n, matrix X);
+double evaluateCost(neuron *n, matrix X, matrix Y);
 
 #endif

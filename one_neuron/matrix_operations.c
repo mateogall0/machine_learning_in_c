@@ -374,3 +374,26 @@ matrix matMulElementWise(matrix mat1, matrix mat2)
 
     return result;
 }
+
+matrix matSubElementWise(matrix mat1, matrix mat2)
+{
+    int rows = mat1.shape[0];
+    int cols = mat1.shape[1];
+
+    matrix result;
+    result.shape = (int *)malloc(2 * sizeof(int));
+    result.shape[0] = rows;
+    result.shape[1] = cols;
+
+    result.mat = (double **)malloc(rows * sizeof(double *));
+    for (int i = 0; i < rows; i++)
+    {
+        result.mat[i] = (double *)malloc(cols * sizeof(double));
+        for (int j = 0; j < cols; j++)
+        {
+            result.mat[i][j] = mat1.mat[i][j] - mat2.mat[i][j];
+        }
+    }
+
+    return result;
+}

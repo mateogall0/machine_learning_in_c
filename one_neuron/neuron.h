@@ -38,6 +38,7 @@ matrix matDivLeft(double n, matrix mat);
 matrix matExp(matrix mat);
 matrix matAddOfMatrices(matrix mat1, matrix mat2);
 matrix matMulElementWise(matrix mat1, matrix mat2);
+matrix matSubElementWise(matrix mat1, matrix mat2);
 
 neuron create_neuron(int nx);
 void print_neuron(neuron n);
@@ -47,5 +48,6 @@ matrix forward_prop(neuron *n, matrix X);
 double cost(matrix Y, matrix A);
 matrix evaluatePrediction(neuron *n, matrix X);
 double evaluateCost(neuron *n, matrix X, matrix Y);
+void gradient_descent(neuron *n, matrix X, matrix Y, matrix A, double alpha);
 
 #endif

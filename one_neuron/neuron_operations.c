@@ -73,3 +73,14 @@ double evaluateCost(neuron *n, matrix X, matrix Y)
     matrix A = forward_prop(n, X);
     return cost(Y, A);
 }
+
+void gradient_descent(neuron *n, matrix X, matrix Y, matrix A, double alpha)
+{
+    int m = Y.shape[1];
+
+    matrix dZ = matSubElementWise(A, Y);
+    matrix dW = matMul(dot(X, T(dZ)), 1/m);
+    double db = (1/m) * sum(dZ);
+    n->W = matSubElementWise(n->W, matMul(T(dW), alpha));
+    n->b = n->b - (alpha * db);
+}

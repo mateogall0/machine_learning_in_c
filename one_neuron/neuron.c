@@ -3,12 +3,12 @@
 int main()
 {
     // Create a neuron with 3 input features (nx = 3)
-    neuron n = create_neuron(3);
+    neuron n = create_neuron(784);
 
     // Create sample input matrix (X)
     matrix X;
     X.shape = malloc(sizeof(int) * 2);
-    X.shape[0] = 3; // Number of input features
+    X.shape[0] = 784; // Number of input features
     X.shape[1] = 5; // Number of samples
 
     X.mat = malloc(sizeof(double*) * X.shape[0]);
@@ -16,26 +16,11 @@ int main()
         X.mat[i] = malloc(sizeof(double) * X.shape[1]);
     }
 
-    // Assign values to the input matrix
-    X.mat[0][0] = 0.1;
-    X.mat[1][0] = 0.2;
-    X.mat[2][0] = 0.3;
-
-    X.mat[0][1] = 0.4;
-    X.mat[1][1] = 0.5;
-    X.mat[2][1] = 0.6;
-
-    X.mat[0][2] = 0.7;
-    X.mat[1][2] = 0.8;
-    X.mat[2][2] = 0.9;
-
-    X.mat[0][3] = 1.0;
-    X.mat[1][3] = 1.1;
-    X.mat[2][3] = 1.2;
-
-    X.mat[0][4] = 1.3;
-    X.mat[1][4] = 1.4;
-    X.mat[2][4] = 1.5;
+    for (int j = 0; j < X.shape[1]; j++) {
+    for (int i = 0; i < X.shape[0]; i++) {
+        X.mat[i][j] = (double)rand() / RAND_MAX;
+    }
+}
     
     print_matrix(X);
     // Perform forward propagation
@@ -73,8 +58,8 @@ int main()
 
     print_neuron(n);
     puts("-------------------------------------------------------");
-    gradient_descent(&n, X, Y, A,0.05);
-    print_neuron(n);
+    gradient_descent(&n, X, Y, A, 0.05);
+    //print_neuron(n);
 
     // Cleanup
     delete_neuron(n);

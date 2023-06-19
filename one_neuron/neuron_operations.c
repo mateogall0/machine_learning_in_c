@@ -56,11 +56,7 @@ double cost(neuron *n, matrix Y, matrix A)
     1.0000001 - A instead of 1 - A
     */
     int m = Y.shape[1];
-    puts("1");
-    print_matrix(Y);
-    print_matrix(A);
     matrix y = matMulElementWise(Y, matLog(A));
-    puts("2");
     matrix x = matLog(matSubLeft(1.0000001, A));
     x = matMulElementWise(matSubLeft(1, Y), x);
     double c = sum(matAddOfMatrices(y, x));

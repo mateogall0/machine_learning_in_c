@@ -30,15 +30,19 @@ double sum(matrix a);
 matrix whereMoreThanPointFive(matrix mat);
 matrix matLog(matrix mat);
 matrix matAdd(matrix mat, double n);
-matrix matSubRight(matrix mat, double n);
+matrix matSub(matrix mat, double n);
+matrix matSubLeft(double n, matrix mat);
 matrix matMul(matrix mat, double n);
+matrix matDiv(matrix mat, double n);
 matrix matDivLeft(double n, matrix mat);
 matrix matExp(matrix mat);
+matrix matAddOfMatrices(matrix mat1, matrix mat2);
 
 neuron create_neuron(int nx);
 void print_neuron(neuron n);
 void delete_neuron(neuron n);
 matrix sigmoid(matrix x);
 matrix forward_prop(neuron *n, matrix X);
+double cost(neuron *n, matrix Y, matrix A);
 
 #endif

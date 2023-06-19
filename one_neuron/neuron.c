@@ -6,9 +6,11 @@ int main()
     matrix X = create_random_normal_matrix(784, 1);
     print_neuron(n);
     puts("===============================================");
-    forward_prop(&n, X);
+    matrix l = forward_prop(&n, X);
     puts("===============================================");
-    print_neuron(n);
+    puts("===============================================");
+    print_matrix(l);
+    delete_matrix(X);
     delete_neuron(n);
     return 0;
 }

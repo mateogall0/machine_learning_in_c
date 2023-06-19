@@ -201,7 +201,7 @@ matrix matAdd(matrix mat, double n)
     return result;
 }
 
-matrix matSubRight(matrix mat, double n)
+matrix matSub(matrix mat, double n)
 {
     int i, j;
     matrix result;
@@ -216,6 +216,25 @@ matrix matSubRight(matrix mat, double n)
         result.mat[i] = malloc(sizeof(double) * result.shape[1]);
         for (j = 0; j < result.shape[1]; j++)
             result.mat[i][j] = mat.mat[i][j] - n;
+    }
+    return result;
+}
+
+matrix matSubLeft(double n, matrix mat)
+{
+    int i, j;
+    matrix result;
+
+    result.shape = malloc(sizeof(mat.shape));
+    result.shape[0] = mat.shape[0];
+    result.shape[1] = mat.shape[1];
+
+    result.mat = malloc(sizeof(double *) * result.shape[0]);
+    for (i = 0; i < result.shape[0]; i++)
+    {
+        result.mat[i] = malloc(sizeof(double) * result.shape[1]);
+        for (j = 0; j < result.shape[1]; j++)
+            result.mat[i][j] = n - mat.mat[i][j];
     }
     return result;
 }
@@ -235,6 +254,25 @@ matrix matMul(matrix mat, double n)
         result.mat[i] = malloc(sizeof(double) * result.shape[1]);
         for (j = 0; j < result.shape[1]; j++)
             result.mat[i][j] = mat.mat[i][j] * n;
+    }
+    return result;
+}
+
+matrix matDiv(matrix mat, double n)
+{
+    int i, j;
+    matrix result;
+
+    result.shape = malloc(sizeof(mat.shape));
+    result.shape[0] = mat.shape[0];
+    result.shape[1] = mat.shape[1];
+
+    result.mat = malloc(sizeof(double *) * result.shape[0]);
+    for (i = 0; i < result.shape[0]; i++)
+    {
+        result.mat[i] = malloc(sizeof(double) * result.shape[1]);
+        for (j = 0; j < result.shape[1]; j++)
+            result.mat[i][j] = mat.mat[i][j] / n;
     }
     return result;
 }
@@ -274,5 +312,36 @@ matrix matExp(matrix mat)
         for (j = 0; j < result.shape[1]; j++)
             result.mat[i][j] = exp(mat.mat[i][j]);
     }
+    return result;
+}
+
+matrix matAddOfMatrices(matrix mat1, matrix mat2)
+{
+    matrix result;
+    int rows = mat1.shape[0];
+    int columns = mat1.shape[1];
+
+    // Check if the matrices have compatible shapes
+    if (rows != mat2.shape[0] || columns != mat2.shape[1]) {
+        printf("Error: Matrices are not compatible for addition.\n");
+        result.mat = NULL;
+        result.shape = NULL;
+        return result;
+    }
+
+    // Create a new matrix to store the result
+    result.mat = (double **)malloc(rows * sizeof(double *));
+    result.shape = (int *)malloc(2 * sizeof(int));
+    result.shape[0] = rows;
+    result.shape[1] = columns;
+
+    // Perform matrix addition
+    for (int i = 0; i < rows; i++) {
+        result.mat[i] = (double *)malloc(columns * sizeof(double));
+        for (int j = 0; j < columns; j++) {
+            result.mat[i][j] = mat1.mat[i][j] + mat2.mat[i][j];
+        }
+    }
+
     return result;
 }

@@ -45,5 +45,20 @@ matrix sigmoid(matrix x)
 matrix forward_prop(neuron *n, matrix X)
 {
     matrix x = matAdd(dot(n->W, X), n->b);
+    delete_matrix(n->A);
     return n->A = sigmoid(x);
+}
+
+double cost(neuron *n, matrix Y, matrix A)
+{
+    /*
+    To avoid division by zero errors:
+    1.0000001 - A instead of 1 - A
+    */
+    int m = Y.shape[1];
+    matrix y = dot(Y, matLog(A));
+    matrix x = matLog(matSubLeft(1.0000001, A));
+    x = dot(matSubLeft(1, Y), x);
+    double c = sum(matAddOfMatrices(y, x));
+    return (c * -1) / m;
 }

@@ -92,3 +92,19 @@ void gradient_descent(neuron *n, matrix X, matrix Y, matrix A, double alpha)
     n->W = a;
     n->b -= (alpha * db);
 }
+
+void train (neuron *n, matrix X, matrix Y, int iterations, double alpha, int verbose, int step)
+{
+    int i;
+    matrix A;
+    double c;
+
+    for (i = 0; i <= iterations; i++)
+    {
+        A = forward_prop(n, A)
+        c = cost(Y, A);
+        if (verbose && (i % step == 0 || i % iterations == 0))
+            printf("Cost after %i iterations: %lf", cost);
+        delete_matrix(A);
+    }
+}

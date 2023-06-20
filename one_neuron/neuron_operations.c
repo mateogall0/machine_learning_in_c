@@ -14,6 +14,7 @@ neuron create_neuron(int nx)
     n.A.shape = malloc(sizeof(int) * 2);
     n.A.shape[0] = 0;
     n.A.shape[1] = 0;
+    n.A.mat = NULL;
 
     return n;
 }
@@ -76,21 +77,16 @@ void gradient_descent(neuron *n, matrix X, matrix Y, matrix A, double alpha)
 {
     int m = Y.shape[1];
 
-
-
     matrix dZ = matSubElementWise(A, Y);
-    print_matrix(A);
-    puts("-------------");
-    print_matrix(Y);
-    matrix dW = matMul(dot(X, T(dZ)), 1/m);
-    //printf("%d\n", 1/m);
-    //print_matrix(dW);
-    double db = (1/m) * sum(dZ);
-    //printf("%lf\n", db);
-    matrix a = matSubElementWise(n->W, matMul(T(dW), alpha));
+    matrix dW = matMul(dot(X, T(dZ)), 1.0/m);
+    double db = sum(dZ) / m;
+    matrix dW_scaled = matMul(dW, alpha);
+    
+    matrix updated_W = matSubElementWise(n->W, T(dW_scaled));
     delete_matrix(n->W);
-    n->W = a;
-    n->b -= (alpha * db);
+    n->W = updated_W;
+    
+    n->b -= alpha * db;
 }
 
 void train (neuron *n, matrix X, matrix Y, int iterations, double alpha, int verbose, int step)
@@ -101,10 +97,11 @@ void train (neuron *n, matrix X, matrix Y, int iterations, double alpha, int ver
 
     for (i = 0; i <= iterations; i++)
     {
-        A = forward_prop(n, A)
+        A = forward_prop(n, X);
         c = cost(Y, A);
+        gradient_descent(n, X, Y, A, alpha);
         if (verbose && (i % step == 0 || i % iterations == 0))
-            printf("Cost after %i iterations: %lf", cost);
+            printf("Cost after %i iterations: %.16lf\n", i, c);
         delete_matrix(A);
     }
 }

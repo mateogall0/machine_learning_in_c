@@ -50,5 +50,6 @@ double cost(matrix Y, matrix A);
 matrix evaluatePrediction(neuron *n, matrix X);
 double evaluateCost(neuron *n, matrix X, matrix Y);
 void gradient_descent(neuron *n, matrix X, matrix Y, matrix A, double alpha);
+void train (neuron *n, matrix X, matrix Y, int iterations, double alpha, int verbose, int step);
 
 #endif

@@ -20,12 +20,10 @@ neuron create_neuron(int nx)
 
 void print_neuron(neuron n)
 {
-    write(STDOUT_FILENO, "Weights: ", 9);
-    fflush(stdout);
+    printf("Weights: ");
     print_matrix(n.W);
     printf("Bias: %.16lf\n", n.b);
-    write(STDOUT_FILENO, "Anchors: ", 9);
-    fflush(stdout);
+    printf("Anchors: ");
     if (n.A.shape[0] != 0)print_matrix(n.A);
     else puts("0");
 }
@@ -78,9 +76,17 @@ void gradient_descent(neuron *n, matrix X, matrix Y, matrix A, double alpha)
 {
     int m = Y.shape[1];
 
+
+
     matrix dZ = matSubElementWise(A, Y);
+    print_matrix(A);
+    puts("-------------");
+    print_matrix(Y);
     matrix dW = matMul(dot(X, T(dZ)), 1/m);
+    //printf("%d\n", 1/m);
+    //print_matrix(dW);
     double db = (1/m) * sum(dZ);
+    //printf("%lf\n", db);
     matrix a = matSubElementWise(n->W, matMul(T(dW), alpha));
     delete_matrix(n->W);
     n->W = a;

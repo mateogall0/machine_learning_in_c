@@ -26,9 +26,9 @@ void print_matrix(matrix mat)
         for (j = 0; j < mat.shape[1]; j++)
         {
             printf("%.8lf", mat.mat[i][j]);
-            fflush(stdout);
             if (j + 1 < mat.shape[1])
-                write(STDOUT_FILENO, ", ", 2);
+                putchar(',');
+                putchar(' ');
         }
         putchar(']');
         putchar('\n');
@@ -64,21 +64,10 @@ void delete_matrix(matrix mat)
 {
     int i;
 
-    if (mat.mat) {
-        for (i = 0; i < mat.shape[0]; i++) {
-            if (mat.mat[i]) {
-                free(mat.mat[i]);
-                mat.mat[i] = NULL;
-            }
-        }
-        free(mat.mat);
-        mat.mat = NULL;
-    }
-
-    if (mat.shape) {
-        free(mat.shape);
-        mat.shape = NULL;
-    }
+    for (i = 0; i < mat.shape[0]; i++)
+        free(mat.mat[i]);
+    if (mat.shape[0] != 0) free(mat.mat);
+    free(mat.shape);
 }
 
 matrix T(matrix mat)
@@ -393,8 +382,6 @@ matrix matSubElementWise(matrix mat1, matrix mat2)
     result.shape = (int *)malloc(2 * sizeof(int));
     result.shape[0] = rows;
     result.shape[1] = cols;
-    print_matrix(mat1);
-    print_matrix(mat2);
 
     result.mat = (double **)malloc(rows * sizeof(double *));
     for (int i = 0; i < rows; i++)

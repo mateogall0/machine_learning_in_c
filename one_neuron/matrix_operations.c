@@ -415,7 +415,6 @@ matrix matLoadTxt(char *filename)
 
     while (getline(&buffer, &sizeBuffer, f) != -1)
     {
-        printf("%i\n", j);
         token = strtok(buffer, " #(,)\n");
         if (shapeFound == 0 && !(strcmp(token, "Shape:")))
         {
@@ -439,8 +438,8 @@ matrix matLoadTxt(char *filename)
         {
             for (k = 0; k < parsed.shape[1] && token; k++)
             {
-                token = strtok(NULL, " #(,)\n");
                 parsed.mat[j][k] = strtod(token, NULL);
+                token = strtok(NULL, " #(,)\n");
             }
             j++;
         }

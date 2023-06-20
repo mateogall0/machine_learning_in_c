@@ -396,26 +396,40 @@ matrix matSubElementWise(matrix mat1, matrix mat2)
     return result;
 }
 
-matrix duplicateMatrix(matrix original)
+matrix matLoadTxt(char *filename)
 {
-    // Create a new matrix with the same shape
-    matrix duplicate;
-    duplicate.shape = (int*)malloc(2 * sizeof(int));
-    duplicate.shape[0] = original.shape[0];
-    duplicate.shape[1] = original.shape[1];
+    matrix parsed;
+    FILE *f = NULL;
+    size_t sizeBuffer = 4096;
+    char *buffer = malloc(sizeBuffer);
+    char *token = NULL;
+    int shapeFound = 0; // Variable to skip extra operations
+    int i;
 
-    // Allocate memory for the matrix data
-    duplicate.mat = (double**)malloc(original.shape[0] * sizeof(double*));
-    for (int i = 0; i < original.shape[0]; i++) {
-        duplicate.mat[i] = (double*)malloc(original.shape[1] * sizeof(double));
+    f = fopen(filename, "r");
+    if (!f)
+    {
+        fprintf(stderr, "Error: failed to open file %s", filename);
+        exit(1);
     }
 
-    // Copy the values from the original matrix to the duplicate
-    for (int i = 0; i < original.shape[0]; i++) {
-        for (int j = 0; j < original.shape[1]; j++) {
-            duplicate.mat[i][j] = original.mat[i][j];
+    while (getline(&buffer, &sizeBuffer, f ) != -1)
+    {
+        token = strtok(buffer, " #(,)\n");
+        if (shapeFound == 0 && !(strcmp(token, "Shape:")))
+        {
+            token = strtok(NULL,  " #(,)\n");
+            printf("%s\n", token);
+            token = strtok(NULL,  " #(,)\n");
+            printf("%s\n", token);
+            shapeFound = 1;
+            continue;
         }
     }
 
-    return duplicate;
+
+
+
+    fclose(f);
+    return parsed;
 }

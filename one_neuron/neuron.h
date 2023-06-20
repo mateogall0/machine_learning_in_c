@@ -6,13 +6,16 @@
 #include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
+#include <string.h>
 
+// Declaration of the Matrix structure
 typedef struct matrix
 {
     double **mat;
     int *shape;
 } matrix;
 
+// Declaration of the Neuron structure
 typedef struct neuron
 {
     matrix W;
@@ -20,6 +23,7 @@ typedef struct neuron
     matrix A;
 }neuron;
 
+// Matrix functions
 double random_normal();
 void print_matrix(matrix mat);
 matrix create_random_normal_matrix();
@@ -39,8 +43,11 @@ matrix matExp(matrix mat);
 matrix matAddOfMatrices(matrix mat1, matrix mat2);
 matrix matMulElementWise(matrix mat1, matrix mat2);
 matrix matSubElementWise(matrix mat1, matrix mat2);
-matrix duplicateMatrix(matrix original);
 
+// Matrix parser for the dataset
+matrix matLoadTxt(char *filename);
+
+// Neuron functions
 neuron create_neuron(int nx);
 void print_neuron(neuron n);
 void delete_neuron(neuron n);
@@ -51,5 +58,6 @@ matrix evaluatePrediction(neuron *n, matrix X);
 double evaluateCost(neuron *n, matrix X, matrix Y);
 void gradient_descent(neuron *n, matrix X, matrix Y, matrix A, double alpha);
 void train (neuron *n, matrix X, matrix Y, int iterations, double alpha, int verbose, int step);
+
 
 #endif

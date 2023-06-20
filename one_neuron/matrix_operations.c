@@ -404,7 +404,7 @@ matrix matLoadTxt(char *filename)
     char *buffer = malloc(sizeBuffer);
     char *token = NULL;
     int shapeFound = 0; // Variable to skip extra operations
-    int i;
+    int i, j = 0, k;
 
     f = fopen(filename, "r");
     if (!f)
@@ -413,22 +413,39 @@ matrix matLoadTxt(char *filename)
         exit(1);
     }
 
-    while (getline(&buffer, &sizeBuffer, f ) != -1)
+    while (getline(&buffer, &sizeBuffer, f) != -1)
     {
+        printf("%i\n", j);
         token = strtok(buffer, " #(,)\n");
         if (shapeFound == 0 && !(strcmp(token, "Shape:")))
         {
-            token = strtok(NULL,  " #(,)\n");
-            printf("%s\n", token);
-            token = strtok(NULL,  " #(,)\n");
-            printf("%s\n", token);
+            parsed.shape = malloc(sizeof(int) * 2);
+            for (i = 0; i < 2; i++)
+            {
+                token = strtok(NULL, " #(,)\n");
+                parsed.shape[i] = atoi(token);
+            }
+            parsed.mat = malloc(sizeof(double *) * parsed.shape[0]);
+
+            // Allocate memory for each row of the matrix
+            for (i = 0; i < parsed.shape[0]; i++)
+            {
+                parsed.mat[i] = malloc(sizeof(double) * parsed.shape[1]);
+            }
+
             shapeFound = 1;
-            continue;
+        }
+        else
+        {
+            for (k = 0; k < parsed.shape[1] && token; k++)
+            {
+                token = strtok(NULL, " #(,)\n");
+                parsed.mat[j][k] = strtod(token, NULL);
+            }
+            j++;
         }
     }
-
-
-
+    free(buffer);
 
     fclose(f);
     return parsed;

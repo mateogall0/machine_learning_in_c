@@ -11,6 +11,10 @@ int main()
     matrix Y_train = matLoadTxt("Y_train");
     matrix X_dev = matLoadTxt("X_dev");
     matrix Y_dev = matLoadTxt("Y_dev");
+    printf("%i --- %i\n", X_train.shape[0], X_train.shape[1]);
+    printf("%i --- %i\n", Y_train.shape[0], Y_train.shape[1]);
+    printf("%i --- %i\n", X_dev.shape[0], X_dev.shape[1]);
+    printf("%i --- %i\n", Y_dev.shape[0], Y_dev.shape[1]);
     /*
     printf("W: %i, %i\n", n.W.shape[0], n.W.shape[1]);
     printf("X: %i, %i\n", X.shape[0], X.shape[1]);

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-
+"""
+This Python file will load the MNIST dataset in a binary
+format to then be interpreted by the C loader of the dataset
+"""
 import numpy as np
 
 lib_train = np.load('../data/Binary_Train.npz')

@@ -21,10 +21,10 @@ neuron create_neuron(int nx)
 
 void print_neuron(neuron n)
 {
-    printf("Weights: ");
+    puts("Weights: ");
     print_matrix(n.W);
     printf("Bias: %.16lf\n", n.b);
-    printf("Anchors: ");
+    puts("Anchors: ");
     if (n.A.shape[0] != 0)print_matrix(n.A);
     else puts("0");
 }

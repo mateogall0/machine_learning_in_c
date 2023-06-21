@@ -447,5 +447,6 @@ matrix matLoadTxt(char *filename)
     free(buffer);
 
     fclose(f);
+    printf("%s loaded correctly\n", filename);
     return parsed;
 }

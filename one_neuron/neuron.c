@@ -12,5 +12,16 @@ int main()
 
     train(&n, X_train, Y_train, 1000, 0.5, 1, 100);
 
+    matrix A = evaluatePrediction(&n, X_dev);
+    double c = evaluateCost(&n, X_dev, Y_dev);
+
+    printf("Validation accuracy: %lf\n", (sum(matIsEqualElementWise(A, Y_dev)) / Y_dev.shape[1] * 100));
+    printf("Validation cost: %lf\n", c);
+
+    delete_matrix(X_train);
+    delete_matrix(Y_train);
+    delete_matrix(X_dev);
+    delete_matrix(Y_dev);
+
     return 0;
 }

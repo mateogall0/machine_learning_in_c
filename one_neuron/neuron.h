@@ -43,6 +43,7 @@ matrix matExp(matrix mat);
 matrix matAddOfMatrices(matrix mat1, matrix mat2);
 matrix matMulElementWise(matrix mat1, matrix mat2);
 matrix matSubElementWise(matrix mat1, matrix mat2);
+matrix matIsEqualElementWise(matrix mat1, matrix mat2);
 
 // Matrix parser for the dataset
 matrix matLoadTxt(char *filename);

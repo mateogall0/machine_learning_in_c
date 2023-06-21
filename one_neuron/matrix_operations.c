@@ -396,6 +396,26 @@ matrix matSubElementWise(matrix mat1, matrix mat2)
     return result;
 }
 
+matrix matIsEqualElementWise(matrix mat1, matrix mat2)
+{
+    matrix result;
+    result.shape = (int *)malloc(2 * sizeof(int));
+    result.shape[0] = mat1.shape[0];
+    result.shape[1] = mat1.shape[1];
+
+    result.mat = (double **)malloc(result.shape[0] * sizeof(double *));
+    for (int i = 0; i < result.shape[0]; i++)
+    {
+        result.mat[i] = (double *)malloc(result.shape[1] * sizeof(double));
+        for (int j = 0; j < result.shape[1]; j++)
+        {
+            result.mat[i][j] = mat1.mat[i][j] == mat2.mat[i][j] ? 1.0 : 0.0;
+        }
+    }
+
+    return result;
+}
+
 matrix matLoadTxt(char *filename)
 {
     matrix parsed;

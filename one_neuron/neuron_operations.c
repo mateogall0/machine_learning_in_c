@@ -12,9 +12,6 @@ neuron create_neuron(int nx)
     n.W = create_random_normal_matrix(1, nx);
     n.b = 0;
     n.A.shape = malloc(sizeof(int) * 2);
-    n.A.shape[0] = 0;
-    n.A.shape[1] = 0;
-    n.A.mat = NULL;
 
     return n;
 }

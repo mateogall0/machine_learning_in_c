@@ -35,9 +35,22 @@ void print_matrix(matrix mat)
     }
 }
 
+void add_matrix_to_list(matrix *new_matrix) {
+    if (head == NULL)
+    {
+        head = malloc(sizeof(matrix *));
+        *head = NULL;
+    }
+    new_matrix->prev = NULL;
+    new_matrix->next = *head;
+    if (new_matrix->next)
+        new_matrix->next->prev = new_matrix;
+    *head = new_matrix;
+}
+
 matrix create_random_normal_matrix(int height, int width)
 {
-    matrix mat;
+    matrix *mat = malloc(sizeof(matrix));
 
     if (height <= 0 || width <= 0)
     {
@@ -45,19 +58,19 @@ matrix create_random_normal_matrix(int height, int width)
         exit(1);
     }
 
-    mat.shape = malloc(sizeof(int) * 2);
-    mat.shape[0] = height;
-    mat.shape[1] = width;
+    mat->shape = malloc(sizeof(int) * 2);
+    mat->shape[0] = height;
+    mat->shape[1] = width;
 
-    mat.mat = malloc(sizeof(double *) * height);
+    mat->mat = malloc(sizeof(double *) * height);
     for (int i = 0; i < height; i++)
     {
-        mat.mat[i] = malloc(sizeof(double) * width);
+        mat->mat[i] = malloc(sizeof(double) * width);
         for (int j = 0; j < width; j++)
-            mat.mat[i][j] = random_normal();
+            mat->mat[i][j] = random_normal();
     }
-
-    return mat;
+    add_matrix_to_list(mat);
+    return *mat;
 }
 
 void delete_matrix(matrix *mat)
@@ -83,17 +96,6 @@ void delete_matrix(matrix *mat)
     free(mat);
 }
 
-void add_matrix_to_list(matrix *new_matrix) {
-    if (head == NULL)
-    {
-        head = malloc(sizeof(matrix *));
-        *head = NULL;
-    }
-    new_matrix->next = *head;
-    if (new_matrix->next)
-        new_matrix->next->prev = new_matrix;
-    *head = new_matrix;
-}
 matrix T(matrix mat)
 {
     matrix *transposed = malloc(sizeof(matrix));
@@ -379,25 +381,26 @@ matrix matMulElementWise(matrix mat1, matrix mat2)
     int cols = mat1.shape[1];
 
     // Create a new matrix to store the result
-    matrix result;
-    result.shape = malloc(2 * sizeof(int));
-    result.shape[0] = rows;
-    result.shape[1] = cols;
+    matrix *result = malloc(sizeof(matrix));
+    result->shape = malloc(2 * sizeof(int));
+    result->shape[0] = rows;
+    result->shape[1] = cols;
 
     // Allocate memory for the result matrix
-    result.mat = malloc(rows * sizeof(double*));
+    result->mat = malloc(rows * sizeof(double*));
     for (int i = 0; i < rows; i++) {
-        result.mat[i] = malloc(cols * sizeof(double));
+        result->mat[i] = malloc(cols * sizeof(double));
     }
 
     // Perform element-wise multiplication
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            result.mat[i][j] = mat1.mat[i][j] * mat2.mat[i][j];
+            result->mat[i][j] = mat1.mat[i][j] * mat2.mat[i][j];
         }
     }
 
-    return result;
+    add_matrix_to_list(result);
+    return *result;
 }
 
 matrix matSubElementWise(matrix mat1, matrix mat2)

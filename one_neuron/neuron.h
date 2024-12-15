@@ -47,6 +47,7 @@ matrix matMulElementWise(matrix mat1, matrix mat2);
 matrix matSubElementWise(matrix mat1, matrix mat2);
 matrix matIsEqualElementWise(matrix mat1, matrix mat2);
 void print_matrices();
+void add_matrix_to_list(matrix *new_matrix);
 
 // Matrix parser for the dataset
 matrix matLoadTxt(char *filename);

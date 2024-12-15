@@ -1,0 +1,10 @@
+*.out
+*.exe
+
+test/
+
+X_dev
+X_train
+X_traindup
+Y_dev
+Y_train

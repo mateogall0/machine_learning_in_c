@@ -13,6 +13,8 @@ typedef struct matrix
 {
     double **mat;
     int *shape;
+    struct matrix *next;
+    struct matrix *prev;
 } matrix;
 
 // Declaration of the Neuron structure
@@ -27,7 +29,7 @@ typedef struct neuron
 double random_normal();
 void print_matrix(matrix mat);
 matrix create_random_normal_matrix();
-void delete_matrix(matrix mat);
+void delete_matrix(matrix *mat);
 matrix T(matrix mat);
 matrix dot(matrix mat1, matrix mat2);
 double sum(matrix a);
@@ -44,9 +46,13 @@ matrix matAddOfMatrices(matrix mat1, matrix mat2);
 matrix matMulElementWise(matrix mat1, matrix mat2);
 matrix matSubElementWise(matrix mat1, matrix mat2);
 matrix matIsEqualElementWise(matrix mat1, matrix mat2);
+void print_matrices();
 
 // Matrix parser for the dataset
 matrix matLoadTxt(char *filename);
+
+// Garbage collector
+void garbage_collector();
 
 // Neuron functions
 neuron create_neuron(int nx);
@@ -60,5 +66,7 @@ double evaluateCost(neuron *n, matrix X, matrix Y);
 void gradient_descent(neuron *n, matrix X, matrix Y, matrix A, double alpha);
 void train (neuron *n, matrix X, matrix Y, int iterations, double alpha, int verbose, int step);
 
+
+extern matrix **head;
 
 #endif

@@ -31,8 +31,6 @@ void print_neuron(neuron n)
 
 void delete_neuron(neuron n)
 {
-    delete_matrix(n.W);
-    delete_matrix(n.A);
 }
 
 matrix sigmoid(matrix x)
@@ -44,7 +42,6 @@ matrix sigmoid(matrix x)
 matrix forward_prop(neuron *n, matrix X)
 {
     matrix x = matAdd(dot(n->W, X), n->b);
-    delete_matrix(n->A);
     return n->A = sigmoid(x);
 }
 
@@ -83,7 +80,6 @@ void gradient_descent(neuron *n, matrix X, matrix Y, matrix A, double alpha)
     matrix dW_scaled = matMul(dW, alpha);
     
     matrix updated_W = matSubElementWise(n->W, T(dW_scaled));
-    delete_matrix(n->W);
     n->W = updated_W;
     
     n->b -= alpha * db;
@@ -102,6 +98,5 @@ void train (neuron *n, matrix X, matrix Y, int iterations, double alpha, int ver
         gradient_descent(n, X, Y, A, alpha);
         if (verbose && (i % step == 0 || i % iterations == 0))
             printf("Cost after %i iterations: %.16lf\n", i, c);
-        delete_matrix(A);
     }
 }

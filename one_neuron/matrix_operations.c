@@ -64,9 +64,6 @@ void delete_matrix(matrix *mat)
 {
     int i;
 
-    if (mat == NULL || mat->shape == NULL || mat->mat == NULL)
-        return;
-
     if (mat->next != NULL)
         mat->next->prev = mat->prev;
     if (mat->prev != NULL)
@@ -454,7 +451,7 @@ matrix matIsEqualElementWise(matrix mat1, matrix mat2)
 
 matrix matLoadTxt(char *filename)
 {
-    matrix parsed;
+    matrix *parsed = malloc(sizeof(matrix));
     FILE *f = NULL;
     size_t sizeBuffer = 4096;
     char *buffer = malloc(sizeBuffer);
@@ -474,27 +471,27 @@ matrix matLoadTxt(char *filename)
         token = strtok(buffer, " #(,)\n");
         if (shapeFound == 0 && !(strcmp(token, "Shape:")))
         {
-            parsed.shape = malloc(sizeof(int) * 2);
+            parsed->shape = malloc(sizeof(int) * 2);
             for (i = 0; i < 2; i++)
             {
                 token = strtok(NULL, " #(,)\n");
-                parsed.shape[i] = atoi(token);
+                parsed->shape[i] = atoi(token);
             }
-            parsed.mat = malloc(sizeof(double *) * parsed.shape[0]);
+            parsed->mat = malloc(sizeof(double *) * parsed->shape[0]);
 
             // Allocate memory for each row of the matrix
-            for (i = 0; i < parsed.shape[0]; i++)
+            for (i = 0; i < parsed->shape[0]; i++)
             {
-                parsed.mat[i] = malloc(sizeof(double) * parsed.shape[1]);
+                parsed->mat[i] = malloc(sizeof(double) * parsed->shape[1]);
             }
 
             shapeFound = 1;
         }
         else
         {
-            for (k = 0; k < parsed.shape[1] && token; k++)
+            for (k = 0; k < parsed->shape[1] && token; k++)
             {
-                parsed.mat[j][k] = strtod(token, NULL);
+                parsed->mat[j][k] = strtod(token, NULL);
                 token = strtok(NULL, " #(,)\n");
             }
             j++;
@@ -504,7 +501,8 @@ matrix matLoadTxt(char *filename)
 
     fclose(f);
     printf("%s loaded correctly\n", filename);
-    return parsed;
+    add_matrix_to_list(parsed);
+    return *parsed;
 }
 
 void garbage_collector()
